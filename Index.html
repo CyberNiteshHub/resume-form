@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Information Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+        form { max-width: 600px; margin: auto; background: #f4f4f4; padding: 20px; border-radius: 10px; }
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+        input::placeholder, textarea::placeholder { color: #888; }
+        .submit-btn { background: #28a745; color: white; padding: 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Resume Information Form</h2>
+    <form id="resumeForm">
+
+        <h3>Personal Details</h3>
+        <label>Full Name:</label>
+        <input type="text" id="name" placeholder="e.g. Rahul Sharma" required>
+        
+        <label>Father's Name:</label>
+        <input type="text" id="father" placeholder="e.g. Ramesh Sharma" required>
+        
+        <label>Mobile Number:</label>
+        <input type="tel" id="mobile" placeholder="e.g. 9876543210" required>
+        
+        <label>Email ID:</label>
+        <input type="email" id="email" placeholder="e.g. rahul@example.com" required>
+        
+        <label>Address:</label>
+        <textarea id="address" rows="3" placeholder="e.g. VPO. Village name, Teh. Tehsil name, Dist. District name, etc.." required></textarea>
+        
+        <label>Tehsil:</label>
+        <input type="text" id="tehsil" placeholder="e.g. Tosham" required>
+        
+        <label>District:</label>
+        <input type="text" id="district" placeholder="e.g. Bhiwani" required>
+        
+        <label>State:</label>
+        <input type="text" id="state" placeholder="e.g. Haryana" required>
+
+        <label>Nationality:</label>
+        <input type="text" id="nationality" placeholder="e.g. Indian" required>
+
+        <label>Date of Birth:</label>
+        <input type="text" id="dob" placeholder="DD/MM/YYYY or DD-MM-YYYY" required>
+
+        <label>Gender:</label>
+        <select id="gender"><option>Select</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select>
+
+        <label>Pin Code:</label>
+        <input type="text" id="pincode" placeholder="e.g. 110001" required>
+        
+        <label>Marital Status:</label>
+        <select id="marital"><option>Select</option><option>Unmarried</option><option>Married</option></select>
+
+        <h3>Education</h3>
+        <label>10th Board:</label>
+        <select id="board10"><option>Select</option><option>HBSE</option><option>CBSE</option></select>
+        
+        <label>10th Class Complete Year:</label>
+        <input type="text" id="year10" placeholder="e.g. 2018" required>
+        
+        <label>12th Board:</label>
+        <select id="board12"><option>Select</option><option>HBSE</option><option>CBSE</option></select>
+        
+        <label>12th Class Complete Year:</label>
+        <input type="text" id="year12" placeholder="e.g. 2020" required>
+
+        <h3> Other Education</h3>
+        <label>Education (if any In this column, enter the name of the degree you completed along with the year of completion.):</label>
+        <textarea id="othereducation" rows="2" placeholder="e.g. B.A Completed in 2025 etc..."></textarea>
+
+        <h3>Experience</h3>
+        <label>Experience (if any):</label>
+        <textarea id="experience" rows="2" placeholder="e.g. 2 years in IT sector"></textarea>
+        
+        <label>Diploma/Certificates:</label>
+        <textarea id="certificates" rows="2" placeholder="e.g. Diploma in Computer Science"></textarea>
+        
+        <label>Languages Known:</label>
+        <input type="text" id="languages" placeholder="e.g. Hindi, English" required>
+        
+        <h3>Skills</h3>
+        <input type="text" id="skills" placeholder="e.g. Java, Python, Networking" required>
+        
+        <h3>Strengths & Hobbies</h3>
+        <textarea id="hobbies" rows="2" placeholder="e.g. Leadership, Problem-Solving, Cricket"></textarea>
+        
+        <button type="button" class="submit-btn" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            var formData = {
+                "Full Name": document.getElementById('name').value,
+                "Father's Name": document.getElementById('father').value,
+                "Mobile Number": document.getElementById('mobile').value,
+                "Email ID": document.getElementById('email').value,
+                "Address": document.getElementById('address').value,
+                "Tehsil": document.getElementById('tehsil').value,
+                "District": document.getElementById('district').value,
+                "State": document.getElementById('state').value,
+                "Nationality": document.getElementById('nationality').value,
+                "Date of Birth": document.getElementById('dob').value,
+                "Gender": document.getElementById('gender').value,
+                "Pin Code": document.getElementById('pincode').value,
+                "Marital Status": document.getElementById('marital').value,
+                "10th Board": document.getElementById('board10').value,
+                "10th Class Complete Year": document.getElementById('year10').value,
+                "12th Board": document.getElementById('board12').value,
+                "12th Class Complete Year": document.getElementById('year12').value,
+                "Other Education": document.getElementById('othereducation').value,
+                "Experience": document.getElementById('experience').value,
+                "Diploma/Certificates": document.getElementById('certificates').value,
+                "Languages Known": document.getElementById('languages').value,
+                "Skills": document.getElementById('skills').value,
+                "Strengths & Hobbies": document.getElementById('hobbies').value
+            };
+        
+            // **Validation: Sabhi fields filled hone chahiye**
+            let isValid = true;
+            Object.keys(formData).forEach(key => {
+                let field = document.getElementById(key.toLowerCase().replace(/[^a-z0-9]/g, ''));
+                if (field && field.value.trim() === "") {
+                    field.style.border = "2px solid red"; // Error highlight
+                    isValid = false;
+                } else if (field) {
+                    field.style.border = "1px solid #ccc"; // Normal border
+                }
+            });
+        
+            if (!isValid) {
+                alert("⚠️ Please fill all required fields before submitting.");
+                return;
+            }
+        
+            // **Submit data to Google Sheets**
+            fetch("https://sheetdb.io/api/v1/q9vtp6avlkz5r", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data: formData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Form Submitted Successfully! Please send your photo on WhatsApp: +918168357702");
+        
+                // WhatsApp number display karega
+                let whatsappDiv = document.createElement("div");
+                whatsappDiv.innerHTML = `<p>Send your photo on WhatsApp: 
+                    <a href="https://wa.me/918168357702" target="_blank" style="color: green; font-weight: bold;">+918168357702</a>
+                </p>`;
+                whatsappDiv.style.textAlign = "center";
+                whatsappDiv.style.marginTop = "20px";
+        
+                document.body.appendChild(whatsappDiv); // Webpage me number show karega
+                document.getElementById("resumeForm").reset(); // Form reset hoga
+            })
+            .catch(error => {
+                alert("Submission failed! Please try again.");
+                console.error("Error:", error);
+            });
+        }
+        
+        // **Date of Birth Validation: Sirf Numbers + '/' ya '-' allowed**
+        document.getElementById("dob").addEventListener("input", function (e) {
+            this.value = this.value.replace(/[^0-9\/-]/g, ''); 
+        });
+        
+    </script>
+</body>
+</html>
